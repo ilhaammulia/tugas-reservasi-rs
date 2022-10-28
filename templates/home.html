@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+  <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+  <title>Reservasi Rumah Sakit</title>
+</head>
+<body>
+  <div class="container">
+    <h3 class="text-center mt-5">Daftar Pasien</h3>
+    <a href="/tambah" class="btn btn-primary mt-3 mb-3 fw-bold btn-sm">Tambah Pasien</a>
+    <table class="table">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">Aksi</th>
+          <th scope="col">Nomor Induk Kependudukan</th>
+          <th scope="col">Nama Pasien</th>
+          <th scope="col">Tanggal Lahir</th>
+          <th scope="col">Alamat</th>
+          <th scope="col">Penyakit</th>
+          <th scope="col">Dokter</th>
+          <th scope="col">Tanggal Reservasi</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for nik in list_pasien %}
+        <tr>
+          <td>
+            <form action="/hapus" method="post">
+              <input type="hidden" name="nik" value="{{nik }}">
+              <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+            </form>
+          </td>
+          <td>{{ nik }}</td>
+          <td>{{ list_pasien[nik]['nama'] }}</td>
+          <td>{{ list_pasien[nik]['tanggal_lahir'] }}</td>
+          <td>{{ list_pasien[nik]['alamat'] }}</td>
+          <td>{{ list_pasien[nik]['penyakit'] }}</td>
+          <td>{{ list_pasien[nik]['dokter'] }}</td>
+          <td>{{ list_pasien[nik]['tanggal_reservasi'] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

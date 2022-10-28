@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+  <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+  <title>Reservasi Rumah Sakit</title>
+</head>
+
+<body>
+  {% macro showerror(field) %}
+    {% if errors %}
+      {% for t in errors %}
+        {% if field in t[0] %}
+        <p class="fs-6 text-danger" role="alert">
+          {{ t[1][0] }}
+        </p>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  {% endmacro %}
+  <div class="container w-50 mt-5">
+    <h3 class="text-center">Tambah Passien</h3>
+    <form class="mt-5" action="/tambah" method="post">
+      {{ form.csrf_token }}
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">{{ form.nik.label }}</label>
+        <div class="col-sm-10">
+          {{ form.nik(class_='form-control') }}
+          {{ showerror('nik') }}
+        </div>
+      </div>
+      <br>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">{{ form.nama.label }}</label>
+        <div class="col-sm-10">
+          {{ form.nama(class_='form-control') }}
+          {{ showerror('nama') }}
+        </div>
+      </div>
+      <br>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">{{ form.tanggal_lahir.label }}</label>
+        <div class="col-sm-10">
+          {{ form.tanggal_lahir(class_='form-control') }}
+          {{ showerror('tanggal_lahir') }}
+        </div>
+      </div>
+      <br>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">{{ form.alamat.label }}</label>
+        <div class="col-sm-10">
+          {{ form.alamat(class_='form-control') }}
+          {{ showerror('alamat') }}
+        </div>
+      </div>
+      <br>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">{{ form.penyakit.label }}</label>
+        <div class="col-sm-10">
+          {{ form.penyakit(class_='form-control') }}
+          {{ showerror('penyakit') }}
+        </div>
+      </div>
+      <br>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">{{ form.dokter.label }}</label>
+        <div class="col-sm-10">
+          {{ form.dokter(class_='form-control') }}
+          {{ showerror('dokter') }}
+        </div>
+      </div>
+      <br>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">{{ form.tanggal_reservasi.label }}</label>
+        <div class="col-sm-10">
+          {{ form.tanggal_reservasi(class_='form-control') }}
+          {{ showerror('tanggal_reservasi') }}
+        </div>
+      </div>
+      <br>
+      {{ form.kirim(class_='btn btn-success form-control') }}
+    </form>
+  </div>
+</body>
+
+</html>
